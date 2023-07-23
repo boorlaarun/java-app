@@ -1,6 +1,6 @@
 pipeline {
      agent any
-    }
+    
     environment {
         PATH = "/opt/maven/bin:$PATH"
     }
@@ -12,6 +12,7 @@ pipeline {
             
         }
     }
+}
 post {
          always {
              echo 'This will always run'

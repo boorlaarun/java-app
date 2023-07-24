@@ -21,7 +21,7 @@ pipeline {
              		scannerHome = tool 'sonarQube';
         		}
      			withSonarQubeEnv('SonarQube') {
-        			 sh 'mvn sonar:sonar'
+        			 sh 'mvn clean verify sonar:sonar'
     			}
     		}
        }
@@ -38,7 +38,7 @@ pipeline {
          }
          success {
              echo 'This will run only if successful'
-	    archiveArtifacts artifacts: '**/*.war', fingerprint: true
+	   // archiveArtifacts artifacts: '**/*.war', fingerprint: true
          }
         failure {
              mail bcc: '', body: "<b>Build Report</b><br>\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL of build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Jenkins CI: Project name ${env.JOB_NAME}, Build No ${env.BUILD_NUMBER}", to: email_ids;
